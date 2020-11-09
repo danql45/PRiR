@@ -1,0 +1,75 @@
+package cW;
+
+import java.util.Scanner;
+
+public class Calkowanie {
+
+    public static void main(String[] args) {
+        int n;
+        double a, b, h, x0, x1, calka = 0;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Podaj liczbe podzialow:");
+        n = sc.nextInt();
+        System.out.println("Podaj poczatek przedzialu calkowania");
+        a = sc.nextDouble();
+        System.out.println("Podaj koniec przedzialu calkowania");
+        b = sc.nextDouble();
+
+        h = (b-a)/n;
+
+        //Metoda Trapezow
+        M_Trapezow[] tr = new M_Trapezow[n];
+        for(int i = 0; i < n; i++) {
+            tr[i] = new M_Trapezow(a + (i/(double)n)*(b-a), a + ((i+1)/(double)n)*(b-a));
+            tr[i].start();
+            try {
+                tr[i].join();
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            calka += tr[i].getResult() * h;
+        }
+        System.out.println("Wartość przyblizona całki oznaczonej dla n=" + n + " - Metoda Trapezow: " + calka);
+
+        //Metoda Prostokatow
+        calka = 0;
+        M_Prostokatow[] pr = new M_Prostokatow[n];
+        for(int i = 0; i < n; i++) {
+            pr[i] = new M_Prostokatow(a + i * h);
+            pr[i].start();
+            try {
+                pr[i].join();
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            calka += pr[i].getResult()*h;
+        }
+        calka += M_Prostokatow.fp(a + (n * h)) * h;
+        System.out.println("Wartość przyblizona całki oznaczonej dla n=" + n + " - Metoda Prostokatow: " + calka);
+
+        //Metoda Simpsona
+        M_Simpsona[] simp = new M_Simpsona[n];
+        calka = 0;
+        h = 0;
+
+        for(int i = 0; i < n; i++) {
+            x0 = a+(i*(b-a))/n;
+            x1 = a+((i+1)*(b-a))/n;
+            calka += 4 * M_Simpsona.fp((x1 + x0)/2);
+            if(i == 0) {
+                h = (x1 - x0) / 2;
+            }
+            simp[i] = new M_Simpsona(x0, x1);
+            simp[i].start();
+            try {
+                simp[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            calka += simp[i].getResult();
+        }
+        calka *= h / 3;
+        System.out.println("Wartość przyblizona całki oznaczonej dla n=" + n + " - Metoda Simpsona: " + calka);
+    }
+}

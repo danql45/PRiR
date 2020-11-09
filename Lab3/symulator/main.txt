@@ -1,0 +1,13 @@
+package simf1;
+
+public class Main {
+    static int iloscMiejsc = 10;
+    static int iloscBolidow = 20;
+
+    public static void main(String[] args) {
+        PitStop pitStop = new PitStop(iloscMiejsc, iloscBolidow);
+        for(int i = 0; i < iloscBolidow; i++){
+            new Bolid(i, 2000, pitStop).start();
+        }
+    }
+}

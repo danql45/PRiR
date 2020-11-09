@@ -1,0 +1,140 @@
+package pFilo;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.concurrent.Semaphore;
+
+public class Filozof extends Thread {
+    static final int MAX = 100;
+    static Semaphore[] widelec = new Semaphore[MAX];
+    static int wariant, liczbaFilozofow;
+    int mojNum;
+    Random rand = new Random();
+
+
+    public Filozof(int nr){
+        this.mojNum = nr;
+    }
+    public void run(){
+        switch(wariant){
+            case 1:
+                w1();
+                break;
+            case 2:
+                w2();
+                break;
+            case 3:
+                w3();
+                break;
+        }
+    }
+    public void w1(){
+        while(true){
+            System.out.println("Filozof " + mojNum + " - Myślę");
+            try{
+                Thread.sleep((long)(7000 * Math.random()));
+            }
+            catch(InterruptedException e){
+            }
+            widelec[mojNum].acquireUninterruptibly();
+            widelec[(mojNum+1)%liczbaFilozofow].acquireUninterruptibly();
+            System.out.println("Filozof " + mojNum + " - Zaczyna jesc");
+            try{
+                Thread.sleep((long)(5000 * Math.random()));
+            }
+            catch(InterruptedException e){
+            }
+            System.out.println("Filozof " + mojNum + " - Konczy jesc");
+            widelec[mojNum].release();
+            widelec[(mojNum + 1)%liczbaFilozofow].release();
+        }
+    }
+    public void w2(){
+        while(true) {
+            System.out.println("Filozof " + mojNum + " - Mysle");
+            try {
+                Thread.sleep((long)(5000 * Math.random()));
+            }
+            catch(InterruptedException e){}
+            if(mojNum == 0) {
+                widelec[(mojNum + 1) % liczbaFilozofow].acquireUninterruptibly();
+                widelec[mojNum].acquireUninterruptibly();
+            }
+            else {
+                widelec[mojNum].acquireUninterruptibly();
+                widelec[(mojNum + 1) % liczbaFilozofow].acquireUninterruptibly();
+            }
+            System.out.println("Filozof " + mojNum + " - Zaczyna jesc");
+            try {
+                Thread.sleep((long) (3000 * Math.random()));
+            }
+            catch(InterruptedException e){}
+            System.out.println("Filozof " + mojNum + " - Konczy jesc");
+            widelec[mojNum].release();
+            widelec[(mojNum + 1) % liczbaFilozofow].release();
+        }
+    }
+    public void w3(){
+        while(true){
+            System.out.println("Filozof " + mojNum + " - Mysle");
+            try {
+                Thread.sleep((long) (5000 * Math.random()));
+            }
+            catch(InterruptedException e){}
+
+            int strona = rand.nextInt(2);
+            boolean podnosiDwaWidelce = false;
+            do{
+                if(strona == 0) {
+                    widelec[mojNum].acquireUninterruptibly();
+                    if(!(widelec[(mojNum + 1) % liczbaFilozofow]).tryAcquire()) {
+                        widelec[mojNum].release();
+                    }
+                    else {
+                        podnosiDwaWidelce = true;
+                    }
+                }
+                else {
+                    widelec[(mojNum + 1) % liczbaFilozofow].acquireUninterruptibly();
+                    if(!(widelec[mojNum].tryAcquire())) {
+                        widelec[(mojNum + 1) % liczbaFilozofow].release();
+                    }
+                    else {
+                        podnosiDwaWidelce = true;
+                    }
+                }
+            } while(!podnosiDwaWidelce);
+
+            System.out.println("Filozof " + mojNum + " - Zaczyna jesc");
+            try {
+                Thread.sleep((long) (3000 * Math.random()));
+            }
+            catch(InterruptedException e){}
+            System.out.println("Filozof " + mojNum + " - Konczy jesc");
+
+            widelec[mojNum].release();
+            widelec[(mojNum + 1) % liczbaFilozofow].release();
+        }
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Wybierz liczbe filozofow [2 - 100]: ");
+        liczbaFilozofow = sc.nextInt();
+        System.out.println("Wybierz wariant:\n" +
+                "1. Klasyczny problem ucztujacych filozofow\n" +
+                "2. Problem ucztujacych filozofow z niesymetrycznym sieganiem po widelec\n" +
+                "3. Rzut monety w rozwiazaniu problemu ucztujacych filozofow");
+        wariant = sc.nextInt();
+        sc.close();
+        if((liczbaFilozofow >= 2 && liczbaFilozofow <= 100) && (wariant >= 1 && wariant <= 3)) {
+            widelec = new Semaphore[liczbaFilozofow];
+            for(int i = 0; i < liczbaFilozofow; i++){
+                widelec[i] = new Semaphore(1);
+            }
+            for(int i = 0; i < liczbaFilozofow; i++){
+                new Filozof(i).start();
+            }
+        }
+        else System.out.println("Niepoprawna liczba filozofow albo wariant");
+    }
+}

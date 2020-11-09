@@ -1,0 +1,80 @@
+package simf1;
+
+import java.util.Random;
+
+public class Bolid extends Thread{
+    static int PIT_STOP = 1;
+    static int WYSCIG = 2;
+    static int WJAZD = 3;
+    static int WYJAZD = 4;
+    static int TANKOWANIE = 2000;
+    static int BRAK_PALIWA = -1;
+    static int AWARIA = -1;
+
+    private int paliwo;
+    private int nr;
+    private int stan;
+    private PitStop pitStop;
+    Random rand;
+
+    public Bolid(int nr, int paliwo, PitStop pitStop){
+        this.nr = nr;
+        this.paliwo = paliwo;
+        this.pitStop = pitStop;
+        this.stan = WYSCIG;
+        this.rand = new Random();
+    }
+    @Override
+    public void run(){
+        while(true){
+            if(stan == PIT_STOP){
+                if(rand.nextInt(2) == 1){
+                    stan = WYJAZD;
+                    paliwo = TANKOWANIE;
+                    System.out.println("Bolid numer " + nr + " wyjezdza z PitStop.");
+                    stan = pitStop.wjedz(nr);
+                }
+                else {
+                    System.out.println("Jeszcze jedno okrązenie.");
+                }
+            }
+            else if(stan == WYJAZD){
+                System.out.println("Wrocilem na tor, Bolid numer " + nr);
+                stan = WYSCIG;
+            }
+            else if(stan == WYSCIG) {
+                paliwo = rand.nextInt(300);
+                System.out.println("Bolid numer " + nr + " sciga sie.");
+                if(paliwo < 400){
+                    stan = WJAZD;
+                }
+                else {
+                    try {
+                        sleep(2000);
+                    }
+                    catch(InterruptedException e){}
+                }
+            }
+            else if(stan == WJAZD) {
+                System.out.println("Bolid numer " + nr + " zbliza sie do zjazdu na Pit Stop");
+                stan = pitStop.wjedzDoPitStop();
+                if(stan == WJAZD) {
+                    paliwo -= rand.nextInt(500);
+                    System.out.println("Rezerwa " + paliwo);
+                    if (paliwo < 0) stan = BRAK_PALIWA;
+                }
+            }
+            else if(stan == BRAK_PALIWA) {
+                System.out.println("Bolid numer " + nr + " wymaga tankowania");
+                stan = AWARIA;
+            }
+            else if(stan == AWARIA){
+                try {
+                    sleep(4000);
+                }
+                catch(InterruptedException e) {}
+                pitStop.serwis(nr);
+            }
+        }
+    }
+}

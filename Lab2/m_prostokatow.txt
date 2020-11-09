@@ -1,0 +1,19 @@
+package cW;
+
+public class M_Prostokatow extends Thread {
+    private double a;
+    private double result;
+
+    public M_Prostokatow(double a) {
+        this.a = a;
+    }
+    public static double fp(double x) {
+        return (Math.cos(Math.pow(x,3)+0.7))/(1.1+Math.cos(0.3*x+0.1));
+    }
+    public void run() {
+        result = fp(a);
+    }
+    public double getResult() {
+        return result;
+    }
+}

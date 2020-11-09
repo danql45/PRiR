@@ -1,0 +1,48 @@
+package pJ;
+
+public class ParallelJulia extends Thread{
+    int me;
+    double cr, ci, zr, zi , newr, newi;
+    static final int N = 3000; //wielkosc obrazka
+    static final int CUTOFF = 1000;
+
+    static int[][] set = new int[N][N];
+
+    public ParallelJulia(int me){
+        this.me = me;
+    }
+
+    public void run() {
+        int begin = 0, end = 0;
+        if (me == 0) {
+            end = (N / 4);
+        } else if (me == 1) {
+            begin = (N / 4);
+            end = (N / 4) * 2;
+        } else if (me == 2) {
+            begin = (N / 4) * 2;
+            end = (N / 4) * 3;
+        } else if (me == 3) {
+            begin = (N / 4) * 3;
+            end = N;
+        }
+        for (int i = begin; i < end; i++) {
+            for (int j = 0; j < N; j++) {
+                cr = 3 * (i - N / 2.0) / N;
+                ci = (j - N / 2.0) / (N / 2.0);
+                zr = cr;
+                zi = ci;
+
+                int k = 0;
+                while (k < CUTOFF && zr * zr + zi * zi < 4.0) {
+                    newr = zr * zr - zi * zi - 0.73;
+                    newi = 2 * zr * zi + 0.189;
+                    zr = newr;
+                    zi = newi;
+                    k++;
+                }
+                set[i][j] = k;
+            }
+        }
+    }
+}

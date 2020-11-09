@@ -1,0 +1,48 @@
+package simf1;
+
+public class PitStop {
+    static int PIT_STOP = 1;
+    static int WJAZD = 2;
+    static int WYJAZD = 3;
+    static int AWARIA = -1;
+
+    private int iloscStanowisk;
+    private int iloscStanowiskZajetych;
+    private int iloscBolidow;
+
+    public PitStop(int iloscStanowisk, int iloscBolidow) {
+        this.iloscStanowisk = iloscStanowisk;
+        this.iloscBolidow = iloscBolidow;
+        iloscStanowiskZajetych = 0;
+    }
+
+    public synchronized int wjedzDoPitStop() {
+        try {
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException e) {}
+        if (iloscStanowiskZajetych < iloscStanowisk) {
+            iloscStanowiskZajetych++;
+            System.out.println("Kierowca wjezdza do Pit Stopu " + iloscStanowiskZajetych);
+            return PIT_STOP;
+        }
+        return WJAZD;
+    }
+
+    public synchronized int wjedz(int numer) {
+        iloscStanowiskZajetych--;
+        System.out.println("Bolid numer " + numer + " wyjezdza z Pit Stopu");
+        return WYJAZD;
+    }
+
+    public synchronized int serwis(int numer) {
+        if(iloscStanowiskZajetych < iloscStanowisk) {
+            System.out.println("Bolid numer " + numer + " jest gotowy do wyjazdu.");
+            return PIT_STOP;
+        }
+        else {
+            System.out.println("Bolid numer " + numer + " oczekuje na pomoc.");
+            return AWARIA;
+        }
+    }
+}

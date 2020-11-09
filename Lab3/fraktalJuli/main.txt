@@ -1,0 +1,49 @@
+package pJ;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+public class Main extends ParallelJulia{
+
+    public Main(int me) {
+        super(me);
+    }
+
+    public static void main(String[] args) throws Exception {
+        ParallelJulia thread0 = new ParallelJulia(0);
+        ParallelJulia thread1 = new ParallelJulia(1);
+        ParallelJulia thread2 = new ParallelJulia(2);
+        ParallelJulia thread3 = new ParallelJulia(3);
+
+        thread0.start();
+        thread1.start();
+        thread2.start();
+        thread3.start();
+
+        thread0.join();
+        thread1.join();
+        thread2.join();
+        thread3.join();
+
+        BufferedImage img = new BufferedImage(N,N, BufferedImage.TYPE_INT_ARGB);
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                int k = set[i][j];
+
+                float level;
+                if(k < CUTOFF) {
+                    level = (float) k / CUTOFF;
+                }
+                else {
+                    level = 0;
+                }
+                Color c = new Color(level, 0, 0); //czerwony
+                img.setRGB(i, j, c.getRGB());
+            }
+        }
+        ImageIO.write(img, "PNG", new File("Julia.png"));
+    }
+}
+

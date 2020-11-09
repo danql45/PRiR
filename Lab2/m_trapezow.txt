@@ -1,0 +1,20 @@
+package cW;
+
+public class M_Trapezow extends Thread {
+    private double a, b;
+    private double result;
+
+    public M_Trapezow(double a, double b) {
+        this.a = a;
+        this.b = b;
+    }
+    public static double fp(double x) {
+        return (Math.cos(Math.pow(x,3)+0.7))/(1.1+Math.cos(0.3*x+0.1));
+    }
+    public void run() {
+        result = (fp(a) + fp(b))/2;
+    }
+    public double getResult() {
+        return result;
+    }
+}
