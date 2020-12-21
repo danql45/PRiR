@@ -1,0 +1,13 @@
+// Setup environment
+    int *arr = (int *)malloc(DIM * ((DIM / num_procs) + 2) * sizeof(int));
+    for (iters = 0; iters < num_iterations; iters++)
+    {
+        //printf("%d %d\n",ID, DIM * ((DIM / num_procs) + 2));
+        j = DIM;
+        for (int i = ID * (GRID_WIDTH / num_procs); i < (ID + 1) * (GRID_WIDTH / num_procs); i++)
+        {
+            arr[j] = global_grid[i];
+            // if(ID==1)
+            //     printf(" %d %d \n",j,i);
+            j++;
+        }

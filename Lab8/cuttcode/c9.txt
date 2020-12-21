@@ -1,0 +1,2 @@
+//game logic neighbours
+int * final = (int *)malloc(DIM * ((DIM / num_procs)) * sizeof(int));

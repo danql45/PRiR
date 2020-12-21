@@ -1,0 +1,13 @@
+    // Messaging variables
+    MPI_Status stat;
+
+    // MPI Setup
+    if (MPI_Init(&argc, &argv) != MPI_SUCCESS)
+    {
+        printf("MPI_Init error\n");
+    }
+
+    MPI_Comm_size(MPI_COMM_WORLD, &num_procs); // Set the num_procs
+    MPI_Comm_rank(MPI_COMM_WORLD, &ID);
+
+    assert(DIM % num_procs == 0);

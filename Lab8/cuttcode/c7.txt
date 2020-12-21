@@ -1,0 +1,10 @@
+else
+            {
+                MPI_Recv(&incoming_2, DIM, MPI_INT, mod(ID + 1, num_procs), 1, MPI_COMM_WORLD, &stat);
+                MPI_Recv(&incoming_1, DIM, MPI_INT, mod(ID - 1, num_procs), 1, MPI_COMM_WORLD, &stat);
+            }
+            if (ID % 2 == 0)
+            {
+                MPI_Recv(&incoming_2, DIM, MPI_INT, mod(ID + 1, num_procs), 1, MPI_COMM_WORLD, &stat);
+                MPI_Recv(&incoming_1, DIM, MPI_INT, mod(ID - 1, num_procs), 1, MPI_COMM_WORLD, &stat);
+            }

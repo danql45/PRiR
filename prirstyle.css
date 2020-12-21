@@ -25,6 +25,20 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+
+#tekstt{
+    justify-content: flex-start;
+    margin-top: 0px;
+    margin-bottom: 60px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#gifek{
+    justify-content: center;
+    display: inline-block;
+}
+
 #div-100{
     display: flex;
     flex-direction: column;
@@ -55,6 +69,19 @@
     border: 5px rgba(19, 1, 1, 0.527) solid;
     margin-left: 10%;
     margin-right: 10%;
+}
+
+#div-c{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px rgba(19, 1, 1, 0.527) solid;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+#kodzikGOL{
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 #div-2, #div-3, #div-14, #div-15, #div-20{

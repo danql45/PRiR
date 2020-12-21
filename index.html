@@ -306,6 +306,192 @@
         </div>
 
 
+
+
+        <div class="card">
+          <div class="card-header" id="headingSix">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                LAB 8
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+            <div id="div-1">
+                <h1 style="color: crimson;">Game Of Life</h1>
+            </div>
+            <div id="tekstt">
+              <h2>Wprowadzenie</h2>
+              <h6 style="margin-left: 3%;">Gra jest jednym z pierwszych i najbardziej znanych przykładów automatu komórkowego, wymyślony w roku 1970 przez brytyjskiego matematyka Johna Conwaya.</h6>
+              <h6 style="margin-left: 3%; margin-bottom: 2%;">Gra została spopularyzowana przez Martina Gardnera na łamach Scientific American . Od momentu publikacji zawsze wzbudzała duże zainteresowanie z powodu 
+                zaskakującego sposobu, w jaki struktury potrafią ewoluować. To właśnie jej pojawienie się wzbudziło zainteresowanie automatami komórkowymi wśród studentów, 
+                którzy traktowali ją jako rozrywkę oraz fizyków, którzy zwrócili uwagę na możliwości automatów w zakresie symulatorów fizycznych. Dzisiaj matematyków, ekonomistów i 
+                naukowców z innych dziedzin interesuje sposób, w jaki przy zastosowaniu tylko kilku prostych reguł powstają skomplikowane struktury.</h6>
+              <h2>Powstanie Gry</h2>
+              <h6 style="margin-left: 3%; margin-bottom: 2%;">Conway zainspirowany pracami Stanisława Ulama, Roberta Schrandta oraz nad układami sąsiadów i regułami zmian, 
+                eksperymentował nad stworzeniem takiego automatu pod koniec lat 60. XX wieku. Reguły, które w ostateczności przyczyniły się do powstania gry Życie zostały wybrane, 
+                ponieważ pozwalały na równowagę pomiędzy zbyt szybkim rozrastaniem się struktur i zbyt wolnym pojawianiem się szybko znikających obiektów. 
+                Do badania populacji żyjących Conway używał komputera PDP-7.</h6>
+              <h2>Reguły Gry</h2>
+              <h6 style="margin-left: 3%; margin-bottom: 2%;">Gra toczy się na nieskończonej planszy (płaszczyźnie) podzielonej na kwadratowe komórki. Każda komórka ma ośmiu „sąsiadów” (tzw. sąsiedztwo Moore’a), 
+                czyli komórki przylegające do niej bokami i rogami. Każda komórka może znajdować się w jednym z dwóch stanów: może być albo „żywa” (włączona), 
+                albo „martwa” (wyłączona). Stany komórek zmieniają się w pewnych jednostkach czasu. Stan wszystkich komórek w pewnej jednostce czasu jest używany do obliczenia stanu wszystkich komórek w następnej jednostce. 
+                Po obliczeniu wszystkie komórki zmieniają swój stan dokładnie w tym samym momencie. Stan komórki zależy tylko od liczby jej żywych sąsiadów. W grze w życie nie ma graczy w dosłownym tego słowa znaczeniu. 
+                Udział człowieka sprowadza się jedynie do ustalenia stanu początkowego komórek. Zdefiniowano kilka wzorców reguł generowania, najbardziej rozpowszechnione są reguły wymyślone przez Conwaya. </h6>
+              <h2>Oscylatory</h2>
+              <h6 style="margin-left: 3%; margin-bottom: 2%;">Oscylatory zmieniają się okresowo, co pewien czas powracają do swojego stanu pierwotnego; najprostsza taka struktura składa się z trzech żywych komórek położonych w jednym rzędzie. 
+                Najprostsze z nich dość często pojawiają się jako produkty końcowe ewolucji struktur. Okresy oscylatorów najczęściej przyjmują wartości 2, 3, 4, 6 lub 8, 
+                choć w grze w życie znaleziono i takie, których okres wynosi prawie 150000. Dla pewnych reguł istnieje nawet oscylator o nazwie „biały rekin”, który ma okres 150000034.</h6>
+            </div>
+            <div class="box-2 d-flex justify-content-center">
+              <img src="Lab8/fontanna.gif" alt="Oscylator Fontanna"  width=250/>
+            </div>
+            <div class="box-2 d-flex justify-content-center">
+              <h6>Oscylator Fontanna (okres 14)</h6>
+            </div>
+            <div id="tekstt">
+              <h6 style="margin-left: 3%; margin-bottom: 2%; margin-top: 2%;">Większość liczb naturalnych może być długościami okresu oscylatora. Wyjątkami są jednak liczby 19, 23, 38, oraz 41. 
+                Nie wiadomo, czy oscylatory dla takich długości okresów istnieją, ale jest bardzo prawdopodobne, że tak jest. 
+                Warto dodać, że dla okresów 34 i 51 jedyne znane oscylatory składają się z niezależnie działających struktur o okresie 2 lub 3 i 17. 
+                Przykładowo oscylator o okresie 34 tworzy się z oscylatorów długości 2 i 17 w takiej odległości, by na siebie nie wpływały. Dla cyklu długości 14 istnieje natomiast tylko jeden oscylator (Fontanna).
+                Charakterystyczną cechą oscylatorów o dłuższych okresach jest podobieństwo tych o cyklu jednakowej długości (np. oscylatory długości 32 przypominają zegary z obracającą się wskazówką). 
+                Ich tworzenie jest dość trudne (wymaga sporej wyobraźni).</h6>
+                <h2>Różne wersje</h2>
+            </div>
+            <div class="box-2 d-flex justify-content-center" style="margin-bottom: 3%;">
+              <img src="Lab8/1.png" alt="v1"  width=50%/>
+            </div>
+            <div class="box-2 d-flex justify-content-center" style="margin-bottom: 3%;">
+              <img src="Lab8/2.png" alt="v2"  width=50%/>
+            </div>
+            <div class="box-2 d-flex justify-content-center" style="margin-bottom: 3%;">
+              <img src="Lab8/3.png" alt="v3"  width=50%/>
+            </div>
+            <div class="box-2 d-flex justify-content-center" style="margin-bottom: 3%;">
+              <img src="Lab8/4.png" alt="v4"  width=50%/>
+            </div>
+            <div class="box-2 d-flex justify-content-center" style="margin-bottom: 3%;">
+              <img src="Lab8/5.png" alt="v5"  width=50%/>
+            </div>
+            <div id="tekstt">
+              <h2>Rezlizacja zadania</h2>
+            </div>
+            <div id="div-1">
+              <h3>Filmik przedstawiający działanie programu</h3>
+            </div>
+            <div class="box-2 d-flex justify-content-center">
+              <video class="video-fluid" controls>Your browser does not support the &lt;video&gt; tag.
+                <source src="Lab8/lab8GOL.mp4" type="video/mp4"/>
+              </video>
+            </div>
+            <div id="div-2">
+              <h3>Kod źródłowy</h3>
+            </div>
+            <div class="box-1 d-flex justify-content-center" id="div-10">
+                <object id="kodzikzad1" data="Lab8/lab8CODE.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-top: 100px;">
+              <h2>Opis Kodu źródłowego</h2>
+            </div>
+            <div id="tekstt" style="margin-bottom: 0px; margin-left: 25%; margin-right: 25%;">
+              <h6>Importy oraz definiowanie stałych</h6>
+            </div>
+            <div id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c1.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-top: 50px; margin-bottom: 0px; margin-left: 25%; margin-right: 25%;">
+              <h6>Modulo na potrzeby programu</h6>
+            </div>
+            <div id="tekstt" style="margin-bottom: 0px; margin-left: 25%; margin-right: 25%;">
+              <h6>Zwróć różnicę jeśli r < 0 to zwróć r +b w innym przypadku zwróc r</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c2.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Klauzula main</h6>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-bottom: 0px;">
+              <h6>Inicjalizacja macierzy poczatkowej oraz potrzebnych do wykonania zmiennych.</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c3.txt"></object>
+            </div>
+
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Zaczynamy korzystanie z biblioteki mpi do której przekazujemy wcześniej otrzymane zmienne i inicjalizujemy funkcje MPI, rezerwujemy również miejsce dla *arr czyli pointera na arr</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c4.txt"></object>
+            </div>
+
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Rozpoczynamy pętle w pętli po której iterujemy od zera, to liczba która została przekazana jako parametr wywołania w innym wypadku ta wartość była ustawiona domyślnie. Przekazujemy wartości do tablicy z której później będziemy odczytywać procesy.</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c5.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Inicjalizujemy zmienne pomocnicze, jesli id procesu jest podzielne przez 2 to wchodzimy w pętle for i rozpoczynamy komunikację między procesami najpierw przez ustawianie odpowiednich wartości w tablicy. 
+                Następnie przesyłamy informację do sąsiednich procesów w tym samym rzędzie lub kolumnie</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c6.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>W innych przypadkach rezerwujemy miejsce za pomoca funkcji z mpi czyli MPI_Recv</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c7.txt"></object>
+            </div>
+
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Po ustawieniu wszystkich wartości czas na przypisanie wartości oraz zarezerwowanie miejsca zależne od ilości procesów.</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c8.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Inicjalizacja zmiennych pomocniczych aby dobrze śledzić kolumny i rzędy korzystamy z funkcji mod oraz wcześniej alokujemy pamięć dla wskaznika na zmienną final</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c9.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Logika dla procesów jeśli chodzi o sprawdzenie swoich sąsiadów, przypisywanie wartości do wyświetlenia</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c10.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Przechodzimy przez pętle for i uzupełniamy wszystkie wartości w naszej macierzy wartościami z macierzy finalnej</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c11.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Wyświetlamy wyniki w konsoli dla użytkownika</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c12.txt"></object>
+            </div>
+            <div id="tekstt" style="margin-left: 25%; margin-right: 25%; margin-top: 50px; margin-bottom: 0px;">
+              <h6>Zwalniamy pamięć wcześniej zaalokowana i kończymy pracę z wątkami</h6>
+            </div>
+            <div class="d-flex justify-content-center" id="div-c">
+              <object id="kodzikGOL" data="Lab8/cuttcode/c13.txt"></object>
+            </div>
+            
+            <div>
+              <a href="https://github.com/danql45/PRiR/tree/master/Lab8">
+                GitHub!
+                <img src="giticon.png" alt="" width="100" height="100">
+              </a>
+            </div>
+          </div>
+        </div>
+
+
     </div>
 </body>
 

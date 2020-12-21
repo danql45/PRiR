@@ -1,0 +1,29 @@
+if (num_procs != 1)
+        {
+            //odd-even send_recv
+            int incoming_1[DIM];
+            int incoming_2[DIM];
+            int send_1[DIM];
+            int send_2[DIM];
+            if (ID % 2 == 0)
+            {
+
+                //first16
+                for (int i = 0; i < DIM; i++)
+                {
+                    send_1[i] = arr[i + DIM];
+                    // printf(" - %d - ",send_1[i]);
+                    //printf(" %d %d\n ",i,i+DIM);
+                }
+                //first row to ID-1
+                MPI_Ssend(&send_1, DIM, MPI_INT, mod(ID - 1, num_procs), 1, MPI_COMM_WORLD);
+
+                //last16
+                for (int i = 0; i < DIM; i++)
+                {
+                    send_2[i] = arr[(DIM * (DIM / num_procs)) + i];
+                    // printf(" %d %d\n ",i,(DIM * (DIM / num_procs)) + i);
+                }
+                //last row to ID+1
+                MPI_Ssend(&send_2, DIM, MPI_INT, mod(ID + 1, num_procs), 1, MPI_COMM_WORLD);
+            }

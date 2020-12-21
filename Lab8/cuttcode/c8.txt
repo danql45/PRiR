@@ -1,0 +1,5 @@
+for (int i = 0; i < DIM; i++)
+{
+	arr[i] = incoming_1[i];
+	arr[(DIM * ((DIM / num_procs) + 1)) + i] = incoming_2[i];
+}

@@ -1,0 +1,3 @@
+// Clean up memory
+free(arr);
+MPI_Finalize(); // finalize so I can exit
