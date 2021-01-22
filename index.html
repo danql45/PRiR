@@ -8,6 +8,11 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.5.0/styles/railscasts.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/src/highlightjs-line-numbers.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>hljs.initLineNumbersOnLoad();</script>
 </head>
 <body>
     <header class="bg-dark"><br>
@@ -675,6 +680,183 @@
           </div>
         </div>
 
+
+
+        <div class="card">
+          <div class="card-header" id="headingTen">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                LAB 13
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+            <div id="div-1">
+                <h1 style="color:dimgray;">LAB 13</h1>
+            </div>
+            <div id="div-1">
+              <h1>ZADANIE 1</h1>
+            </div>
+            <div id="div-colab">
+              <iframe src="Lab13\lab13_zadaniaPRiR.pdf" width="100%" height="1000" scrolling="yes" class="iframe-class" frameborder="0"></iframe>
+            </div>
+            <div id="div-1">
+              <h1>ZADANIE 2</h1>
+            </div>
+            <div id="div-1">
+              <h3>Przedstawie program zrealizowany w języku Python, który realizuje proste operacje na fotografiach. Otwiera obraz, nakłada filtr Gaussa, zmienia rozmiar i zapisuje przetworzone zdjęcie do folderu. Pierwszy program realizuje zadanie standardowo wykonując instrukcje po instrukcji. W drugim programie użyjemy Concurrent Futures, które wspiera tworzenie dodatkowych procesów do wykonywania instrukcji równolegle. Porównamy szybkość obu programów. </h3>
+              <h3>Istnieje również pakiet Multiprocessing, Concurrent Futures jest to prostszy interfejs, który działa prawie tak samo, niezależnie od tego, czy używasz wielu wątków, czy wielu procesów</h3>
+            </div>
+<div id="div-1" style="margin-bottom: 5px;">
+  <h4>Kod programu - standardowa pętla for</h4>
+</div>
+<div id="codestylediv">
+<pre><code>  import time
+  from PIL import Image, ImageFilter
+  
+  img_names = [
+      'photo-1516117172878-fd2c41f4a759.jpg',
+      'photo-1532009324734-20a7a5813719.jpg',
+      'photo-1524429656589-6633a470097c.jpg',
+      'photo-1530224264768-7ff8c1789d79.jpg',
+      'photo-1541698444083-023c97d3f4b6.jpg',
+      'photo-1522364723953-452d3431c267.jpg',
+      'photo-1513938709626-033611b8cc03.jpg',
+      'photo-1507143550189-fed454f93097.jpg',
+      'photo-1493976040374-85c8e12f0c0e.jpg',
+      'photo-1504198453319-5ce911bafcde.jpg',
+      'photo-1530122037265-a5f1f91d3b99.jpg',
+      'photo-1516972810927-80185027ca84.jpg',
+      'photo-1550439062-609e1531270e.jpg',
+      'photo-1549692520-acc6669e2f0c.jpg'
+  ]
+  
+  t1 = time.perf_counter()
+  
+  size = (1200, 1200)
+  
+  for img_name  in img_names:
+      img = Image.open(img_name)
+      img = img.filter(ImageFilter.GaussianBlur(15))
+      img.thumbnail(size)
+      img.save(f'processed/{img_name}')
+      print(f'{img_name} was processed...')
+  
+  t2 = time.perf_counter()
+  
+  print(f'Finished in {t2-t1} seconds')
+</code></pre>
+<div><h6>Output:</h6></div>
+<pre><code>  >> photo-1516117172878-fd2c41f4a759.jpg was processed...
+  >> photo-1532009324734-20a7a5813719.jpg was processed...
+  >> photo-1524429656589-6633a470097c.jpg was processed...
+  >> photo-1530224264768-7ff8c1789d79.jpg was processed...
+  >> photo-1541698444083-023c97d3f4b6.jpg was processed...
+  >> photo-1522364723953-452d3431c267.jpg was processed...
+  >> photo-1513938709626-033611b8cc03.jpg was processed...
+  >> photo-1507143550189-fed454f93097.jpg was processed...
+  >> photo-1493976040374-85c8e12f0c0e.jpg was processed...
+  >> photo-1504198453319-5ce911bafcde.jpg was processed...
+  >> photo-1530122037265-a5f1f91d3b99.jpg was processed...
+  >> photo-1516972810927-80185027ca84.jpg was processed...
+  >> photo-1550439062-609e1531270e.jpg was processed...
+  >> photo-1549692520-acc6669e2f0c.jpg was processed...
+  >> Finished in 14.5659666 seconds
+  
+  >> Process finished with exit code 0
+</code></pre>
+<div><h6>Przetworzenie 14 fotografii dla standardowego programu, który nie korzysta z dodatkowych procesów zajeło 14,5 sekundy</h6></div>
+</div>
+<div id="div-1" style="margin-top: 30px; margin-left: 23%; margin-right: 23%;">
+  <h6>Widok z Menedżera zadań</h6>
+  <img src="Lab13\mZadan1.png" alt="" >
+</div>
+
+<div id="div-1" style="margin-bottom: 5px;">
+  <hr style="width:100%; height:10px; border: 1px solid black; background-color:black">
+  <h4>Kod programu wykorzystujacego Concurrent Futures</h4>
+</div>
+<div id="codestylediv">
+<pre><code>  import time
+  import concurrent.futures
+  from PIL import Image, ImageFilter
+  
+  img_names = [
+      'photo-1516117172878-fd2c41f4a759.jpg',
+      'photo-1532009324734-20a7a5813719.jpg',
+      'photo-1524429656589-6633a470097c.jpg',
+      'photo-1530224264768-7ff8c1789d79.jpg',
+      'photo-1541698444083-023c97d3f4b6.jpg',
+      'photo-1522364723953-452d3431c267.jpg',
+      'photo-1513938709626-033611b8cc03.jpg',
+      'photo-1507143550189-fed454f93097.jpg',
+      'photo-1493976040374-85c8e12f0c0e.jpg',
+      'photo-1504198453319-5ce911bafcde.jpg',
+      'photo-1530122037265-a5f1f91d3b99.jpg',
+      'photo-1516972810927-80185027ca84.jpg',
+      'photo-1550439062-609e1531270e.jpg',
+      'photo-1549692520-acc6669e2f0c.jpg'
+  ]
+  
+  t1 = time.perf_counter()
+  
+  size = (1200, 1200)
+  
+  def process_image(img_name):
+      img = Image.open(img_name)
+      img = img.filter(ImageFilter.GaussianBlur(15))
+      img.thumbnail(size)
+      img.save(f'processed/{img_name}')
+      print(f'{img_name} was processed...')
+  
+  if __name__ == "__main__":
+      with concurrent.futures.ProcessPoolExecutor() as executor:
+          executor.map(process_image, img_names)
+  
+  t2 = time.perf_counter()
+  
+  print(f'Finished in {t2-t1} seconds')
+</code></pre>
+<div><h6>Output:</h6></div>
+<pre><code>  >> photo-1516117172878-fd2c41f4a759.jpg was processed...
+  >> photo-1524429656589-6633a470097c.jpg was processed...
+  >> photo-1530224264768-7ff8c1789d79.jpg was processed...
+  >> photo-1532009324734-20a7a5813719.jpg was processed...
+  >> photo-1507143550189-fed454f93097.jpg was processed...
+  >> photo-1541698444083-023c97d3f4b6.jpg was processed...
+  >> photo-1522364723953-452d3431c267.jpg was processed...
+  >> photo-1513938709626-033611b8cc03.jpg was processed...
+  >> photo-1516972810927-80185027ca84.jpg was processed...
+  >> photo-1530122037265-a5f1f91d3b99.jpg was processed...
+  >> photo-1504198453319-5ce911bafcde.jpg was processed...
+  >> photo-1493976040374-85c8e12f0c0e.jpg was processed...
+  >> photo-1549692520-acc6669e2f0c.jpg was processed...
+  >> photo-1550439062-609e1531270e.jpg was processed...
+  >> Finished in 4.484036199999999 seconds
+
+  >> Process finished with exit code 0
+</code></pre>
+<div><h6>Przetworzenie 14 fotografii dla programu wykorzystujacego Multiprocessing Pool, który tworzy dodatkowe procesy zajeło 4,5 sekundy</h6></div>
+</div>
+<div id="div-1" style="margin-top: 30px; margin-left: 23%; margin-right: 23%;">
+  <h6>Widok z Menedżera zadań</h6>
+  Wykorzystując concurrent.futures.ProcessPoolExecutor(), tworzone są dodatkowe procesy 'Python', które równolegle wykonują instrukcje naszego programu
+  <img src="Lab13\mZadan2.png" alt="" >
+</div>
+<div id="codestylediv">
+  <h6>Podsumowanie:</h6>
+  <h6>Moduł concurrent.futures zapewnia interfejs wysokiego poziomu dla asynchronicznie wykonywanych wywołań.
+    Wykonanie asynchroniczne można wykonać za pomocą wątków, używając ThreadPoolExecutor lub oddzielnych procesów, używając ProcessPoolExecutor. Oba implementują ten sam interfejs, który jest zdefiniowany przez abstrakcyjną klasę Executor.
+    W przypadku korzystania z ProcessPoolExecutor ta metoda dzieli elementy iteracyjne na kilka fragmentów, które przesyła do puli jako oddzielne zadania.
+    Umożliwia to znaczne przyśpieszenie naszego programu, na przetwarzaniu tylko 14-stu obrazów zyskaliśmy 10 sekund.
+  </h6>
+</div>
+              <a href="https://github.com/danql45/PRiR/tree/master/Lab13">
+                GitHub!
+                <img src="giticon.png" alt="" width="100" height="100">
+              </a>
+            </div>
+        </div>
 
 
     </div>
